@@ -30,7 +30,5 @@ function set_link(owner, repo, el_id, prefix) {
                xhttp.send();
           }
 
-          function onload_update(){
-          }
 
           set_link('egeldenhuys', 'prothesis-release', 'down_anchor', "<i class=\"material-icons left\">cloud</i> Download ");
