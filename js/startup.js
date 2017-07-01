@@ -75,4 +75,4 @@ function set_carousel_mac(){
      $('.carousel').carousel('set', 3);
 }
 
-set_link('egeldenhuys', 'prothesis-release', 'down_anchor', get_os_easy(), "<i class=\"material-icons left\">cloud</i> Download ");
+set_link('prothesis-software', 'prothesis-software.github.io', 'down_anchor', get_os_easy(), "<i class=\"material-icons left\">cloud</i> Download ");
