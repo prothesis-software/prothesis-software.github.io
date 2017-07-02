@@ -9,9 +9,15 @@ function start_load() {
   });
 }
 
+/*
+a[] => An array of releases.
+a[]['assets'] => An array representing assets to the release; Three of these should be binary packages
+a[]['assets'][i][browser_download_url] => A link to the download of the i'th asset.
+a[]['assets'][i][name] => Name of the i'th asset.
+*/
 
 function set_link(owner, repo, el_id, distro, prefix) {
-               var baseUrl = "https://api.github.com/repos/" + owner + "/" + repo + "/tags";
+               var baseUrl = "https://api.github.com/repos/" + owner + "/" + repo + "/releases";
                var xhttp = new XMLHttpRequest();
                xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
@@ -19,14 +25,16 @@ function set_link(owner, repo, el_id, distro, prefix) {
                          var data = JSON.parse(this.responseText);
                          var i;
 
-                         for (i = 0; i < data.length; i++) {
-                              if(data[i]['name'].indexOf(distro) !== -1)
+                         var workingData = data[data.length-1]; // Assume we want the latest release.
+                         for (i = 0; i < workingData['assets'].length-1 ; i++) {
+                              if(workingData['assets'][i]['name'].indexOf(distro) !== -1)
                                    break;
                          }
 
+
                          if (element && data) {
-                              element.href = data[i]['zipball_url'];
-                              element.innerHTML = prefix + data[i]['name'];
+                              element.href = workingData['assets'][i]['browser_download_url'];
+                              element.innerHTML = prefix + workingData['assets'][i]['name'];
                               update_carousel();
                          } else {
                               alert("Something went terribly wrong!");
