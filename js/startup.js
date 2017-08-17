@@ -64,7 +64,7 @@ function update_carousel(){
           set_carousel_win();
      }
      if(window.navigator.userAgent.indexOf("Linux")  !== -1 ){
-          set_carousel_mac();
+          set_carousel_linux();
      }
      if(window.navigator.userAgent.indexOf("Mac")  !== -1){
           set_carousel_mac();
