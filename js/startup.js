@@ -7,12 +7,25 @@ function start_load() {
     $('.carousel').carousel();
     update_carousel();
       });
-    $('.carousel').on('mouseup',function(){
-	update_link();
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+    $(document).ready(function(){
+        // select the target node
+        var target = document.getElementById('carousel');
+
+        // create an observer instance
+        var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            update_link();
+          });
+        });
+
+        // configuration of the observer:
+        var config = { attributes: true, childList: false, characterData: false };
+
+        // pass in the target node, as well as the observer options
+        observer.observe(target, config);
     });
-    setInterval(function(){
-	update_link();
-    },5000);
 }
 
 function sleep(ms) {
